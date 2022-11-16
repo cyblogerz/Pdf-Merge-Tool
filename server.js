@@ -1,5 +1,7 @@
 const express = require('express')
 const path = require('path')
+const multer = require('multer')
+const upload = multer({dest: 'uploads/'})
 const app = express()
 const port = 8090
 
@@ -8,7 +10,9 @@ app.get('/', (req, res) => {
 })
 
 
-app.post('/', (req, res) => {
+app.post('/merge', upload.array('pdfs',2),function (req, res,next){
+  console.log(req.files);
+  res.send({data:req.files});
   //multer - handle multiple file / form data
   
 })
